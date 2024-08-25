@@ -6,11 +6,8 @@ const regd_users = express.Router();
 let users = [];
 
 const isValid = (username)=>{ //returns boolean
-    //write code to check is the username is valid
-    }
-
-// Check if the user with the given username and password exists
-const authenticatedUser = (username, password) => {
+    // Check if the user with the given username and password exists
+    
     // Filter the users array for any user with the same username and password
     let validusers = users.filter((user) => {
         return (user.username === username && user.password === password);
