@@ -86,10 +86,10 @@ const doesExist = (username) => {
 
 
 // Add a book review
-//regd_users.put("/auth/review/:isbn", (req, res) => {
+regd_users.put("/auth/review/:isbn", (req, res) => {
   //Write your code here
-  //return res.status(300).json({message: "Yet to be implemented"});
-//});
+return res.status(300).json({message: "Yet to be implemented"});
+});
 
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
