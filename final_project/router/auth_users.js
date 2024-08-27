@@ -5,23 +5,39 @@ const regd_users = express.Router();
 
 let users = [];
 
-const isValid = (username)=>{ //returns boolean
-    // Check if the user with the given username and password exists
-    
-    // Filter the users array for any user with the same username and password
-    let validusers = users.filter((user) => {
-        return (user.username === username && user.password === password);
+// Check if the user with the given username already exists
+const isValid = (username)=>{ 
+    // Filter the users array for any user with the same username
+    let userswithsamename = users.filter((user) => {
+        return user.username === username;
     });
-    // Return true if any valid user is found, otherwise false
-    if (validusers.length > 0) {
+   // Return true if any user with the same username is found, otherwise false 
+    if (userswithsamename.length > 0) {
         return true;
-    } else {
+    }else{
         return false;
     }
 }
+
+// Check if the user with the given username and password exists
+const authenticatedUser = (username, password) => {
+    // Filter the uswers array for any user with thte same username and password
+    let validuswers = users.filter((user) => {
+        return (user.username === username && user.password === password);
+    });
+    // Return true if any valid user is found, oitherwise fail
+    if (validuswers.length > 0) {
+        return true;
+    }else{
+        return false;
+    }
+}
+    
 const app = express();
+
 app.use(session({secret:"fingerpint"},resave=true,saveUninitialized=true));
 app.use(express.json());
+
 // Middleware to authenticate requests to "/customer" endpoint
 app.use("/customer", function auth(req, res, next) {
     // Check if user is logged in and has valid access token
