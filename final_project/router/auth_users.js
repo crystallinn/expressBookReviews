@@ -55,7 +55,19 @@ const doesExist = (username) => {
 // Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
   //Write your code here
-return res.status(300).json({message: "Yet to be implemented"});
+    const isbn = req.params.isbn;
+    let book = books[isbn];
+    if(book) {
+        let review = req.query.review;
+        let reviewer = req.session.authorization['username'];
+        if(review) {
+            book['reviews'][reviewer] = review;
+            books[isbn] = book;
+        }
+        res.send('The review for ISBN ${isbn} has been added/updated.');
+    }
+    else{
+        return res.status(400).json({message: "Something went wrong"});
 });
 
 module.exports.authenticated = regd_users;
