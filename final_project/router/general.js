@@ -76,25 +76,6 @@ public_users.get('/review/:isbn',function (req, res) {
     res.send(JSON.stringify({reviewisbn}, null, 4));
 });
 
-// Add a book review
-regd_users.put("/auth/review/:isbn", (req, res) => {
-
-  const isbn = req.params.isbn;
-  let filtered_book = books[isbn]
-  if (filtered_book) {
-      let review = req.query.review;
-      let reviewer = req.session.authorization['username'];
-      if(review) {
-          filtered_book['reviews'][reviewer] = review;
-          books[isbn] = filtered_book;
-      }
-      res.send(`The review for the book with ISBN  ${isbn} has been added/updated.`);
-  }
-  else{
-      res.send("There is no book with this ISBN.");
-  }
-});
-
 
 module.exports.general = public_users;
 
