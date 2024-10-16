@@ -36,26 +36,13 @@ const authenticatedUser = (username, password) => {
     
 
 
-// Check if a user with the given username already exists
-const doesExist = (username) => {
-    // Filter the users array for any user with the same username
-    let userswithsamename = users.filter((user) => {
-        return user.username === username;
-    });
-    // Return true if any user with the same username is found, otherwise false
-    if (userswithsamename.length > 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 
 const app = express();
 app.use(session({secret:"fingerpint"},resave=true,saveUninitialized=true));
 app.use(express.json());
 // Middleware to authenticate requests to "/friends" endpoint
-app.use("/friends", function auth(req, res, next) {
+app.use("/customer", function auth(req, res, next) {
     // Check if user is logged in and has valid access token
     if (req.session.authorization) {
         let token = req.session.authorization['accessToken'];
